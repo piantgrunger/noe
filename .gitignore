@@ -1,5 +1,13 @@
+# lazarus / pascal
+*.compiled
+*.lps
+*.bak
+*.ppu
+*.o
 *.exe
+*.dylib
 *.dll
+*.so
 *.lps
 *.dbg
 *.res
