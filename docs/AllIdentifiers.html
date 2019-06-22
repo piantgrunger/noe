@@ -40,12 +40,12 @@
 <tr class="list">
 <td class="itemname"><a class="bold" href="DTCore.html#AppendColumns">AppendColumns</a></td>
 <td class="itemunit"><a class="bold" href="DTCore.html">DTCore</a></td>
-<td class="itemdesc"><p>&nbsp;</p></td>
+<td class="itemdesc"><p>Append B (column vectors) after last column of A. A and B must have the same height.</p></td>
 </tr>
 <tr class="list2">
 <td class="itemname"><a class="bold" href="DTCore.html#AppendRows">AppendRows</a></td>
 <td class="itemunit"><a class="bold" href="DTCore.html">DTCore</a></td>
-<td class="itemdesc"><p>&nbsp;</p></td>
+<td class="itemdesc"><p>Append B (row vectors) after last row of A. A and B must have the same width.</p></td>
 </tr>
 <tr class="list">
 <td class="itemname"><a class="bold" href="DTCore.html#Apply">Apply</a></td>
@@ -55,24 +55,22 @@
 <tr class="list2">
 <td class="itemname"><a class="bold" href="DTCore.html#CopyMatrix">CopyMatrix</a></td>
 <td class="itemunit"><a class="bold" href="DTCore.html">DTCore</a></td>
-<td class="itemdesc"><p>copying a matrix</p></td>
+<td class="itemdesc"><p>Copying a matrix.</p></td>
 </tr>
 <tr class="list">
 <td class="itemname"><a class="bold" href="DTCore.html#Cov">Cov</a></td>
 <td class="itemunit"><a class="bold" href="DTCore.html">DTCore</a></td>
-<td class="itemdesc"><p>compute covariance matrix</p></td>
+<td class="itemdesc"><p>Compute covariance matrix.</p></td>
 </tr>
 <tr class="list2">
 <td class="itemname"><a class="bold" href="DTCore.html#CreateMatrix">CreateMatrix</a></td>
 <td class="itemunit"><a class="bold" href="DTCore.html">DTCore</a></td>
-<td class="itemdesc"><p>create a matrix with random values</p></td>
+<td class="itemdesc"><p>Create a matrix with random values.</p></td>
 </tr>
 <tr class="list">
 <td class="itemname"><a class="bold" href="DTCore.html#CreateMatrix">CreateMatrix</a></td>
 <td class="itemunit"><a class="bold" href="DTCore.html">DTCore</a></td>
-<td class="itemdesc"><p>create a matrix filled with x
-
-<p></p></td>
+<td class="itemdesc"><p>Create a matrix filled with x. </p></td>
 </tr>
 <tr class="list2">
 <td class="itemname"><a class="bold" href="DTCore.html#DarkTealInit">DarkTealInit</a></td>
@@ -112,7 +110,7 @@
 <tr class="list">
 <td class="itemname"><a class="bold" href="DTCore.html#Dot">Dot</a></td>
 <td class="itemunit"><a class="bold" href="DTCore.html">DTCore</a></td>
-<td class="itemdesc"><p>&nbsp;</p></td>
+<td class="itemdesc"><p>Dot product between two matrices. It implements BLAS _dgemm.</p></td>
 </tr>
 <tr class="list2">
 <td class="itemname"><a class="bold" href="DTCore.html#Exp">Exp</a></td>
@@ -147,12 +145,12 @@
 <tr class="list2">
 <td class="itemname"><a class="bold" href="DTCore.html#InsertColumnsAt">InsertColumnsAt</a></td>
 <td class="itemunit"><a class="bold" href="DTCore.html">DTCore</a></td>
-<td class="itemdesc"><p>Insert <code>B</code> into <code>A</code> at column index <code>pos</code>. A and B must have the same height.</p></td>
+<td class="itemdesc"><p>Insert B into A at column index pos. A and B must have the same height.</p></td>
 </tr>
 <tr class="list">
 <td class="itemname"><a class="bold" href="DTCore.html#InsertRowsAt">InsertRowsAt</a></td>
 <td class="itemunit"><a class="bold" href="DTCore.html">DTCore</a></td>
-<td class="itemdesc"><p>&nbsp;</p></td>
+<td class="itemdesc"><p>Insert B into A at row index pos. A and B must have the same width.</p></td>
 </tr>
 <tr class="list2">
 <td class="itemname"><a class="bold" href="DTCore.html#Max">Max</a></td>
@@ -197,7 +195,7 @@
 <tr class="list2">
 <td class="itemname"><a class="bold" href="DTCore.html#Ones">Ones</a></td>
 <td class="itemunit"><a class="bold" href="DTCore.html">DTCore</a></td>
-<td class="itemdesc"><p>create a matrix filled with one</p></td>
+<td class="itemdesc"><p>Create a matrix filled with one.</p></td>
 </tr>
 <tr class="list">
 <td class="itemname"><a class="bold" href="DTCore.html#PopRow">PopRow</a></td>
@@ -212,7 +210,7 @@
 <tr class="list">
 <td class="itemname"><a class="bold" href="DTCore.html#PrintMatrix">PrintMatrix</a></td>
 <td class="itemunit"><a class="bold" href="DTCore.html">DTCore</a></td>
-<td class="itemdesc"><p>helper function to print a matrix using stdout</p></td>
+<td class="itemdesc"><p>Helper function to print a matrix using stdout</p></td>
 </tr>
 <tr class="list2">
 <td class="itemname"><a class="bold" href="DTMLUtils.html#Relu">Relu</a></td>
@@ -347,56 +345,61 @@
 <p>Please note that <code>TDTMatrixFromCSV</code> can only load a CSV containing numeric values only. The values are stored as floating point numbers.</p></td>
 </tr>
 <tr class="list2">
+<td class="itemname"><a class="bold" href="DTCore.html#TDTMatrixFromCSVFast">TDTMatrixFromCSVFast</a></td>
+<td class="itemunit"><a class="bold" href="DTCore.html">DTCore</a></td>
+<td class="itemdesc"><p>A faster CSV loader (experimental)</p></td>
+</tr>
+<tr class="list">
 <td class="itemname"><a class="bold" href="DTCore.html#TFloatVector">TFloatVector</a></td>
 <td class="itemunit"><a class="bold" href="DTCore.html">DTCore</a></td>
 <td class="itemdesc"><p>Primitive type wrapper</p></td>
 </tr>
-<tr class="list">
+<tr class="list2">
 <td class="itemname"><a class="bold" href="DTCore.html#TileDown">TileDown</a></td>
 <td class="itemunit"><a class="bold" href="DTCore.html">DTCore</a></td>
 <td class="itemdesc"><p>&nbsp;</p></td>
 </tr>
-<tr class="list2">
+<tr class="list">
 <td class="itemname"><a class="bold" href="DTCore.html#TileRight">TileRight</a></td>
 <td class="itemunit"><a class="bold" href="DTCore.html">DTCore</a></td>
 <td class="itemdesc"><p>&nbsp;</p></td>
 </tr>
-<tr class="list">
+<tr class="list2">
 <td class="itemname"><a class="bold" href="DTPreprocessing.html#TMap">TMap</a></td>
 <td class="itemunit"><a class="bold" href="DTPreprocessing.html">DTPreprocessing</a></td>
 <td class="itemdesc"><p>&nbsp;</p></td>
 </tr>
-<tr class="list2">
+<tr class="list">
 <td class="itemname"><a class="bold" href="DTPreprocessing.TMinMaxScaler.html">TMinMaxScaler</a></td>
 <td class="itemunit"><a class="bold" href="DTPreprocessing.html">DTPreprocessing</a></td>
 <td class="itemdesc"><p>A class to scale the data between 0 and 1.</p></td>
 </tr>
-<tr class="list">
+<tr class="list2">
 <td class="itemname"><a class="bold" href="DTPreprocessing.TOneHotEncoder.html">TOneHotEncoder</a></td>
 <td class="itemunit"><a class="bold" href="DTPreprocessing.html">DTPreprocessing</a></td>
 <td class="itemdesc"><p>A class to encode labels in a one-vs-all fashion.</p></td>
 </tr>
-<tr class="list2">
+<tr class="list">
 <td class="itemname"><a class="bold" href="DTLinAlg.TPCA.html">TPCA</a></td>
 <td class="itemunit"><a class="bold" href="DTLinAlg.html">DTLinAlg</a></td>
 <td class="itemdesc"><p>A class to compute principal component analysis</p></td>
 </tr>
-<tr class="list">
+<tr class="list2">
 <td class="itemname"><a class="bold" href="DTMLUtils.html#TrainTestSplit">TrainTestSplit</a></td>
 <td class="itemunit"><a class="bold" href="DTMLUtils.html">DTMLUtils</a></td>
 <td class="itemdesc"><p>&nbsp;</p></td>
 </tr>
-<tr class="list2">
+<tr class="list">
 <td class="itemname"><a class="bold" href="DTMLUtils.html#TSummaryMap">TSummaryMap</a></td>
 <td class="itemunit"><a class="bold" href="DTMLUtils.html">DTMLUtils</a></td>
 <td class="itemdesc"><p>holding dataset statistic summaries, e.g., 'mean' and stdev</p></td>
 </tr>
-<tr class="list">
+<tr class="list2">
 <td class="itemname"><a class="bold" href="DTCore.html#Variance">Variance</a></td>
 <td class="itemunit"><a class="bold" href="DTCore.html">DTCore</a></td>
 <td class="itemdesc"><p>Get row of A from index idx.   </p></td>
 </tr>
-<tr class="list2">
+<tr class="list">
 <td class="itemname"><a class="bold" href="DTCore.html#Variance">Variance</a></td>
 <td class="itemunit"><a class="bold" href="DTCore.html">DTCore</a></td>
 <td class="itemdesc"><p>Get row of A from index idx.    </p></td>
