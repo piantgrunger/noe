@@ -14,12 +14,12 @@ const
   BLAS_FILENAME = 'libopenblas.dll';
   {$ENDIF}
   {$IFDEF UNIX}
-    {$IFDEF LINUX}
-      BLAS_FILENAME = 'libopenblas.so';
-    {$ENDIF}
-    {$IFDEF DARWIN}
-      BLAS_FILENAME = 'libopenblas.dylib';
-    {$ENDIF}
+  {$IFDEF LINUX}
+  BLAS_FILENAME = 'libopenblas.so';
+  {$ENDIF}
+  {$IFDEF DARWIN}
+  BLAS_FILENAME = 'libopenblas.dylib';
+  {$ENDIF}
   {$ENDIF}
 
 type
@@ -108,27 +108,26 @@ procedure DarkTealInit;
 { free the engine }
 procedure DarkTealRelease;
 
-{ helper function to print a matrix using stdout }
+{ Helper function to print a matrix using stdout }
 procedure PrintMatrix(M: TDTMatrix);
 
 { @exclude}
 function CreateVector(size: integer; x: double): TFloatVector;
 
-{ create a matrix filled with x
-
+{ Create a matrix filled with x.
   @param(x A double value to fill the matrix) }
 function CreateMatrix(row, col: integer; x: double): TDTMatrix; overload;
 
-{ create a matrix with random values }
+{ Create a matrix with random values. }
 function CreateMatrix(row, col: integer): TDTMatrix; overload;
 
-{ create a matrix filled with one }
+{ Create a matrix filled with one. }
 function Ones(row, col: integer): TDTMatrix;
 
-{ copying a matrix }
+{ Copying a matrix. }
 function CopyMatrix(M: TDTMatrix): TDTMatrix;
 
-{ compute covariance matrix }
+{ Compute covariance matrix. }
 function Cov(X, Y: TDTMatrix): TDTMatrix;
 
 { Delete element in A.val with position pos.
@@ -146,15 +145,27 @@ function GetColumn(A: TDTMatrix; idx: integer): TDTMatrix;
   @param(idx is an integer indicating the designated row index)
   @returns(1 by n TDTMatrix)}
 function GetRow(A: TDTMatrix; idx: integer): TDTMatrix;
+
+{ Dot product between two matrices. It implements BLAS _dgemm. }
 function Dot(A, B: TDTMatrix): TDTMatrix;
+
 function Abs(x: double): double; overload;
 function Abs(A: TDTMatrix): TDTMatrix; overload;
 function Add(A, B: TDTMatrix): TDTMatrix;
+
+{ Append B (column vectors) after last column of A.
+  A and B must have the same height. }
 function AppendColumns(A, B: TDTMatrix): TDTMatrix;
+
+{ Append B (row vectors) after last row of A.
+  A and B must have the same width. }
 function AppendRows(A, B: TDTMatrix): TDTMatrix;
+
+{ Insert B into A at row index pos.
+  A and B must have the same width. }
 function InsertRowsAt(A, B: TDTMatrix; pos: integer): TDTMatrix;
 
-{ Insert @code(B) into @code(A) at column index @code(pos).
+{ Insert B into A at column index pos.
   A and B must have the same height. }
 function InsertColumnsAt(A, B: TDTMatrix; pos: integer): TDTMatrix;
 
@@ -208,6 +219,18 @@ function Apply(func: TCallbackDouble; A: TDTMatrix): TDTMatrix;
   Please note that @name can only load a CSV containing numeric values only.
   The values are stored as floating point numbers. }
 function TDTMatrixFromCSV(f: string): TDTMatrix;
+
+{ @abstract(A faster CSV loader (experimental))
+
+  @name precomputes the final size of the matrix, so the memory allocation
+  can be performed beforehand.
+  The loader makes some assumptions on the CSV file:
+  @unorderedList(
+  @item(values are numerical (convertible to float))
+  @item(All rows are of equal size)
+  @item(The CSV file has NO header)
+  ) }
+function TDTMatrixFromCSVFast(filename: string): TDTMatrix;
 
 { Delete several elements in A.val with position pos.
   Should @bold(NOT) be used directly on a TDTMatrix. }
@@ -991,6 +1014,66 @@ begin
   end;
   Result.Width := cntCol;
   Result.Height := cntRow;
+end;
+
+function TDTMatrixFromCSVFast(filename: string): TDTMatrix;
+var
+  tfIn: TextFile;
+  s, row: string;
+  i, idx, cntRow, cntCol: integer;
+  DoneFirstScan: boolean = False;
+begin
+  Result := nil;
+  assignfile(tfIn, filename);
+  try
+    { first run -- to estimate matrix size }
+    Reset(tfIn);
+    cntRow := 0;
+    cntCol := 0;
+    SetLength(Result.val, 1);
+    while not EOF(tfIn) do
+    begin
+      Readln(tfIn, row);
+      if not DoneFirstScan then
+      begin
+        DoneFirstScan := True;
+        for i := 0 to Length(row) - 1 do
+          if row[i] = ',' then
+            Inc(cntCol);
+      end;
+      Inc(cntRow);
+    end;
+    Inc(cntCol);
+
+    SetLength(Result.val, cntCol * cntRow);
+    Result.Width := cntCol;
+    Result.Height := cntRow;
+
+    { second run -- the actual parsing}
+    Reset(tfIn);
+    idx := 0;
+    while not EOF(tfIn) do
+    begin
+      Readln(tfIn, row);
+      s := '';
+      for i := 1 to Length(row) do
+      begin
+        if row[i] in ['0'..'9', '.'] then
+        begin
+          s := s + row[i];
+        end;
+        if (row[i] = ',') or (i = Length(row)) then
+        begin
+          Result.val[idx] := StrToFloat(s);
+          Inc(idx);
+          s := '';
+        end;
+      end;
+    end;
+  except
+    on E: EInOutError do
+      writeln('File handling error occurred. Details: ', E.Message);
+  end;
 end;
 
 initialization
