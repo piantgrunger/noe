@@ -175,12 +175,15 @@ The mandatory include unit for darkteal</p>
 <td class="itemcode"><code>function <b><a  href="DTCore.html#TDTMatrixFromCSV">TDTMatrixFromCSV</a></b>(f: string): <a  href="DTCore.TDTMatrix.html">TDTMatrix</a>;</code></td>
 </tr>
 <tr class="list">
-<td class="itemcode"><code>procedure <b><a  href="DTCore.html#DeleteElements">DeleteElements</a></b>(var A: <a  href="DTCore.TDTMatrix.html">TDTMatrix</a>; pos, amount: integer);</code></td>
+<td class="itemcode"><code>function <b><a  href="DTCore.html#TDTMatrixFromCSVFast">TDTMatrixFromCSVFast</a></b>(filename: string): <a  href="DTCore.TDTMatrix.html">TDTMatrix</a>;</code></td>
 </tr>
 <tr class="list2">
-<td class="itemcode"><code>procedure <b><a  href="DTCore.html#SetColumn">SetColumn</a></b>(var A: <a  href="DTCore.TDTMatrix.html">TDTMatrix</a>; B: <a  href="DTCore.TDTMatrix.html">TDTMatrix</a>; idx: integer);</code></td>
+<td class="itemcode"><code>procedure <b><a  href="DTCore.html#DeleteElements">DeleteElements</a></b>(var A: <a  href="DTCore.TDTMatrix.html">TDTMatrix</a>; pos, amount: integer);</code></td>
 </tr>
 <tr class="list">
+<td class="itemcode"><code>procedure <b><a  href="DTCore.html#SetColumn">SetColumn</a></b>(var A: <a  href="DTCore.TDTMatrix.html">TDTMatrix</a>; B: <a  href="DTCore.TDTMatrix.html">TDTMatrix</a>; idx: integer);</code></td>
+</tr>
+<tr class="list2">
 <td class="itemcode"><code>procedure <b><a  href="DTCore.html#SwapColumns">SwapColumns</a></b>(var A: <a  href="DTCore.TDTMatrix.html">TDTMatrix</a>; idx1, idx2: integer);</code></td>
 </tr>
 </table>
@@ -219,7 +222,7 @@ free the engine</p>
 </tr>
 <tr><td colspan="1">
 <p>
-helper function to print a matrix using stdout</p>
+Helper function to print a matrix using stdout</p>
 </td></tr>
 </table>
 <table class="detail wide_list">
@@ -228,9 +231,7 @@ helper function to print a matrix using stdout</p>
 </tr>
 <tr><td colspan="1">
 <p>
-create a matrix filled with x
-
-<p></p>
+Create a matrix filled with x. </p>
 <h6 class="description_section">Parameters</h6>
 <dl class="parameters">
 <dt>x</dt>
@@ -244,7 +245,7 @@ create a matrix filled with x
 </tr>
 <tr><td colspan="1">
 <p>
-create a matrix with random values</p>
+Create a matrix with random values.</p>
 </td></tr>
 </table>
 <table class="detail wide_list">
@@ -253,7 +254,7 @@ create a matrix with random values</p>
 </tr>
 <tr><td colspan="1">
 <p>
-create a matrix filled with one</p>
+Create a matrix filled with one.</p>
 </td></tr>
 </table>
 <table class="detail wide_list">
@@ -262,7 +263,7 @@ create a matrix filled with one</p>
 </tr>
 <tr><td colspan="1">
 <p>
-copying a matrix</p>
+Copying a matrix.</p>
 </td></tr>
 </table>
 <table class="detail wide_list">
@@ -271,7 +272,7 @@ copying a matrix</p>
 </tr>
 <tr><td colspan="1">
 <p>
-compute covariance matrix</p>
+Compute covariance matrix.</p>
 </td></tr>
 </table>
 <table class="detail wide_list">
@@ -322,7 +323,9 @@ Get row of A from index idx.   </p>
 <td class="itemcode"><span id="Dot"></span><code>function <b>Dot</b>(A, B: <a  href="DTCore.TDTMatrix.html">TDTMatrix</a>): <a  href="DTCore.TDTMatrix.html">TDTMatrix</a>;</code></td>
 </tr>
 <tr><td colspan="1">
-&nbsp;</td></tr>
+<p>
+Dot product between two matrices. It implements BLAS _dgemm.</p>
+</td></tr>
 </table>
 <table class="detail wide_list">
 <tr class="list">
@@ -350,21 +353,27 @@ Get row of A from index idx.   </p>
 <td class="itemcode"><span id="AppendColumns"></span><code>function <b>AppendColumns</b>(A, B: <a  href="DTCore.TDTMatrix.html">TDTMatrix</a>): <a  href="DTCore.TDTMatrix.html">TDTMatrix</a>;</code></td>
 </tr>
 <tr><td colspan="1">
-&nbsp;</td></tr>
+<p>
+Append B (column vectors) after last column of A. A and B must have the same height.</p>
+</td></tr>
 </table>
 <table class="detail wide_list">
 <tr class="list">
 <td class="itemcode"><span id="AppendRows"></span><code>function <b>AppendRows</b>(A, B: <a  href="DTCore.TDTMatrix.html">TDTMatrix</a>): <a  href="DTCore.TDTMatrix.html">TDTMatrix</a>;</code></td>
 </tr>
 <tr><td colspan="1">
-&nbsp;</td></tr>
+<p>
+Append B (row vectors) after last row of A. A and B must have the same width.</p>
+</td></tr>
 </table>
 <table class="detail wide_list">
 <tr class="list">
 <td class="itemcode"><span id="InsertRowsAt"></span><code>function <b>InsertRowsAt</b>(A, B: <a  href="DTCore.TDTMatrix.html">TDTMatrix</a>; pos: integer): <a  href="DTCore.TDTMatrix.html">TDTMatrix</a>;</code></td>
 </tr>
 <tr><td colspan="1">
-&nbsp;</td></tr>
+<p>
+Insert B into A at row index pos. A and B must have the same width.</p>
+</td></tr>
 </table>
 <table class="detail wide_list">
 <tr class="list">
@@ -372,7 +381,7 @@ Get row of A from index idx.   </p>
 </tr>
 <tr><td colspan="1">
 <p>
-Insert <code>B</code> into <code>A</code> at column index <code>pos</code>. A and B must have the same height.</p>
+Insert B into A at column index pos. A and B must have the same height.</p>
 </td></tr>
 </table>
 <table class="detail wide_list">
@@ -604,6 +613,27 @@ Transform each element in <code>A</code> using a real-valued function <code>func
 Create a matrix from a CSV file.
 
 <p>Please note that <code>TDTMatrixFromCSV</code> can only load a CSV containing numeric values only. The values are stored as floating point numbers.</p>
+</td></tr>
+</table>
+<table class="detail wide_list">
+<tr class="list">
+<td class="itemcode"><span id="TDTMatrixFromCSVFast"></span><code>function <b>TDTMatrixFromCSVFast</b>(filename: string): <a  href="DTCore.TDTMatrix.html">TDTMatrix</a>;</code></td>
+</tr>
+<tr><td colspan="1">
+<p>
+A faster CSV loader (experimental)</p>
+<p>
+
+
+<p><code>TDTMatrixFromCSVFast</code> precomputes the final size of the matrix, so the memory allocation can be performed beforehand. The loader makes some assumptions on the CSV file: </p>
+
+<ul class="paragraph_spacing">
+  <li><p>values are numerical (convertible to float)</p></li>
+  <li><p>All rows are of equal size</p></li>
+  <li><p>The CSV file has NO header</p></li>
+</ul>
+
+<p></p>
 </td></tr>
 </table>
 <table class="detail wide_list">

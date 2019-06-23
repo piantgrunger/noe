@@ -72,6 +72,8 @@ begin
   { You may also change the default training iteration and learning rate }
   LogisticRegression.NIter := 1000;
   LogisticRegression.LearningRate := 0.01;
+  // Uncheck win32 compiler option if you want to enable verbosity
+  LogisticRegression.Verbose := True;
 
   MemoOutput.Lines.Clear;
   MemoOutput.Lines.Add('Training Logistic Regression classifier...');
