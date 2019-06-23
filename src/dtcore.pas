@@ -6,7 +6,7 @@ unit DTCore;
 interface
 
 uses
-  Classes, SysUtils, dynlibs;
+  Classes, SysUtils, dynlibs, LazLogger;
 
 const
   {$IFDEF MSWINDOWS}
@@ -274,17 +274,21 @@ uses Math;
 
 procedure DarkTealInit;
 begin
-  Assert(FileExists(BLAS_FILENAME), BLAS_FILENAME + ' cannot be found.');
-  libHandle := LoadLibrary(BLAS_FILENAME);
-  Pointer(@blas_dcopy) := GetProcedureAddress(libHandle, 'cblas_dcopy');
-  Pointer(@blas_daxpy) := GetProcedureAddress(libHandle, 'cblas_daxpy');
-  Pointer(@blas_ddot) := GetProcedureAddress(libHandle, 'cblas_ddot');
-  Pointer(@blas_dscal) := GetProcedureAddress(libHandle, 'cblas_dscal');
-  Pointer(@blas_dgemm) := GetProcedureAddress(libHandle, 'cblas_dgemm');
-  Pointer(@blas_dtbmv) := GetProcedureAddress(libHandle, 'cblas_dtbmv');
-  Pointer(@blas_dasum) := GetProcedureAddress(libHandle, 'cblas_dasum');
-  Pointer(@LAPACKE_dgesvd) := GetProcedureAddress(libHandle, 'LAPACKE_dgesvd');
-  Pointer(@LAPACKE_dgeev) := GetProcedureAddress(libHandle, 'LAPACKE_dgeev');
+  if FileExists(BLAS_FILENAME) then
+  begin
+    libHandle := LoadLibrary(BLAS_FILENAME);
+    Pointer(@blas_dcopy) := GetProcedureAddress(libHandle, 'cblas_dcopy');
+    Pointer(@blas_daxpy) := GetProcedureAddress(libHandle, 'cblas_daxpy');
+    Pointer(@blas_ddot) := GetProcedureAddress(libHandle, 'cblas_ddot');
+    Pointer(@blas_dscal) := GetProcedureAddress(libHandle, 'cblas_dscal');
+    Pointer(@blas_dgemm) := GetProcedureAddress(libHandle, 'cblas_dgemm');
+    Pointer(@blas_dtbmv) := GetProcedureAddress(libHandle, 'cblas_dtbmv');
+    Pointer(@blas_dasum) := GetProcedureAddress(libHandle, 'cblas_dasum');
+    Pointer(@LAPACKE_dgesvd) := GetProcedureAddress(libHandle, 'LAPACKE_dgesvd');
+    Pointer(@LAPACKE_dgeev) := GetProcedureAddress(libHandle, 'LAPACKE_dgeev');
+  end
+  else
+    DebugLn('The required ' + BLAS_FILENAME + 'is not found.');
 end;
 
 procedure DarkTealRelease;
