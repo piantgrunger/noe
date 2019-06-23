@@ -67,7 +67,7 @@ type
 
     { @param(X An m by n feature matrix)
       @param(y An m by 1 matrix containing ground truth label) }
-    function StartTraining(X, y: TDTMatrix): TBaseClassifier; override;
+    function StartTraining(X, y: TDTMatrix): TClassifierLogisticRegression; override;
     function MakePrediction(X: TDTMatrix): TDTMatrix; override;
   private
     W, b: TDTMatrix;
@@ -169,7 +169,8 @@ begin
   Verbose := False;
 end;
 
-function TClassifierLogisticRegression.StartTraining(X, y: TDTMatrix): TBaseClassifier;
+function TClassifierLogisticRegression.StartTraining(X, y: TDTMatrix):
+TClassifierLogisticRegression;
 var
   Output, Errors, yBin, dY: TDTMatrix;
   i, j, m: integer;
