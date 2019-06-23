@@ -42,7 +42,7 @@ type
   TClassifierNaiveBayes = class(TBaseClassifier)
     ddof: integer;
     ClassWiseDatasetSummary: TClassWiseSummaryMap;
-    uniqueLabels: TFloatVector;
+    UniqueLabels: TFloatVector;
   public
     constructor Create; overload;
     constructor Create(ddof: integer);
@@ -61,6 +61,7 @@ type
   TClassifierLogisticRegression = class(TBaseClassifier)
     NIter: integer;
     LearningRate: double;
+    Verbose: boolean;
   public
     constructor Create; overload;
 
@@ -109,9 +110,9 @@ begin
 
   { summarize class-wise dataset }
   ClassWiseDatasetSummary := TClassWiseSummaryMap.Create;
-  self.uniqueLabels := GetUnique(y.val);
+  self.UniqueLabels := GetUnique(y.val);
   { for each class }
-  for c in self.uniqueLabels do
+  for c in self.UniqueLabels do
   begin
     ClassWiseData := CreateMatrix(0, X.Width);
     for j := 0 to X.Height - 1 do
@@ -134,13 +135,13 @@ var
   c, prob: double;
   i, row, cidx: integer;
 begin
-  preds := CreateMatrix(0, Length(self.uniqueLabels));
+  preds := CreateMatrix(0, Length(self.UniqueLabels));
   for row := 0 to X.Height - 1 do
   begin
     instance := X.GetRow(row);
-    probs := CreateMatrix(1, Length(self.uniqueLabels));
+    probs := CreateMatrix(1, Length(self.UniqueLabels));
     cidx := 0;
-    for c in self.uniqueLabels do
+    for c in self.UniqueLabels do
     begin
       prob := 1;
       means := TSummaryMap(ClassWiseDatasetSummary.KeyData[c]).KeyData['mean'];
@@ -165,6 +166,7 @@ constructor TClassifierLogisticRegression.Create;
 begin
   NIter := 200;
   LearningRate := 0.01;
+  Verbose := False;
 end;
 
 function TClassifierLogisticRegression.StartTraining(X, y: TDTMatrix): TBaseClassifier;
@@ -179,6 +181,7 @@ begin
 
   m := X.Height;
 
+  { Initialize model parameters }
   W := CreateMatrix(X.Width, yBin.Width);
   b := CreateMatrix(1, yBin.Width, 1 / X.Width);
 
@@ -188,6 +191,15 @@ begin
     dY := yBin - Output;
     W := W + LearningRate * X.T.Dot(dY);
     b := b + LearningRate * Mean(dY, 0);
+
+    { Print training progress }
+    if Verbose then
+    begin
+      if i = 1 then
+        WriteLn('Training started');
+      if i mod (NIter div 10) = 0 then
+        WriteLn('Error at ', i, ':', Mean(Power(dY, 2)));
+    end;
   end;
 
   Result := self;
