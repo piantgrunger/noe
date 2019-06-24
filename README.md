@@ -8,10 +8,11 @@ Darkteal is a library to perform some basic scientific computing in (object) pas
 
 In the near future, darkteal is aimed to be a foundation to make the development of machine learning algorithm easier. That is why you will notice some neural network-related functions, such as data preprocessing function, a collection of activations, and loss functions.
 
-**Important note:** This library is:
-- In a very early development, thus, many missing functionality
-- Not for production (yet) purpose, since it is not built for performance-critical applications
-- Heavily tested on windows only
+**Important note:**
+- It is **strongly recommended** to remove -WG flag in your compiler option (e.g., untick Win32 gui application checkbox in lazarus compiler options)
+- This library is in a very early development, thus, many missing functionality
+- This library is currently not for production (yet) purpose, since it is not built for performance-critical applications
+- I only heavily test this library on windows only
 
 ## Quick Start
 
