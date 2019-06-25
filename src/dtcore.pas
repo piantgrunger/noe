@@ -41,6 +41,7 @@ type
     class operator Add(x: integer; A: TDTMatrix): TDTMatrix; overload;
     class operator Subtract(A, B: TDTMatrix): TDTMatrix; overload;
     class operator Subtract(A: TDTMatrix; x: double): TDTMatrix; overload;
+    class operator Subtract(x: double; A: TDTMatrix): TDTMatrix; overload;
     class operator Multiply(A: TDTMatrix; x: double): TDTMatrix; overload;
     class operator Multiply(x: double; A: TDTMatrix): TDTMatrix; overload;
     class operator Multiply(A, B: TDTMatrix): TDTMatrix; overload;
@@ -176,6 +177,7 @@ function InsertColumnsAt(A, B: TDTMatrix; pos: integer): TDTMatrix;
 
 function Subtract(A, B: TDTMatrix): TDTMatrix; overload;
 function Subtract(A: TDTMatrix; x: double): TDTMatrix; overload;
+function Subtract(x: double; A: TDTMatrix): TDTMatrix; overload;
 function Multiply(A: TDTMatrix; x: double): TDTMatrix; overload;
 function Multiply(A, B: TDTMatrix): TDTMatrix; overload;
 function Diag(A: TDTMatrix): TDTMatrix; overload;
@@ -342,6 +344,11 @@ end;
 class operator TDTMatrix.Subtract(A: TDTMatrix; x: double): TDTMatrix;
 begin
   Result := DTCore.Subtract(A, x);
+end;
+
+class operator TDTMatrix.Subtract(x: double; A: TDTMatrix): TDTMatrix;
+begin
+  Result := DTCore.Subtract(x, A);
 end;
 
 class operator TDTMatrix.Multiply(A: TDTMatrix; x: double): TDTMatrix;
@@ -1007,6 +1014,11 @@ end;
 function Subtract(A: TDTMatrix; x: double): TDTMatrix;
 begin
   Result := Subtract(A, CreateMatrix(A.Height, A.Width, x));
+end;
+
+function Subtract(x: double; A: TDTMatrix): TDTMatrix;
+begin
+  Result := Subtract(CreateMatrix(A.Height, A.Width, x), A);
 end;
 
 function TDTMatrixFromCSV(f: string): TDTMatrix;
