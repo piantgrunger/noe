@@ -45,8 +45,9 @@ type
     class operator Multiply(A: TDTMatrix; x: double): TDTMatrix; overload;
     class operator Multiply(x: double; A: TDTMatrix): TDTMatrix; overload;
     class operator Multiply(A, B: TDTMatrix): TDTMatrix; overload;
-    class operator Divide(A: TDTMatrix; x: double): TDTMatrix; overload;
     class operator Divide(A, B: TDTMatrix): TDTMatrix; overload;
+    class operator Divide(A: TDTMatrix; x: double): TDTMatrix; overload;
+    class operator Divide(x: double; A: TDTMatrix): TDTMatrix; overload;
     function T: TDTMatrix;
     function GetRow(idx: integer): TDTMatrix;
     function GetColumn(idx: integer): TDTMatrix;
@@ -181,8 +182,9 @@ function Subtract(x: double; A: TDTMatrix): TDTMatrix; overload;
 function Multiply(A: TDTMatrix; x: double): TDTMatrix; overload;
 function Multiply(A, B: TDTMatrix): TDTMatrix; overload;
 function Diag(A: TDTMatrix): TDTMatrix; overload;
-function Divide(A: TDTMatrix; x: double): TDTMatrix; overload;
 function Divide(A, B: TDTMatrix): TDTMatrix; overload;
+function Divide(A: TDTMatrix; x: double): TDTMatrix; overload;
+function Divide(x: double; A: TDTMatrix): TDTMatrix; overload;
 function Sum(A: TDTMatrix): double; overload;
 function Sum(A: TDTMatrix; axis: integer): TDTMatrix; overload;
 function IndexMax(A: TDTMatrix): double; overload;
@@ -366,15 +368,22 @@ begin
   Result := DTCore.Multiply(A, B);
 end;
 
+class operator TDTMatrix.Divide(A, B: TDTMatrix): TDTMatrix;
+begin
+  Result := DTCore.Divide(A, B);
+end;
+
 class operator TDTMatrix.Divide(A: TDTMatrix; x: double): TDTMatrix;
 begin
   Result := DTCore.Divide(A, x);
 end;
 
-class operator TDTMatrix.Divide(A, B: TDTMatrix): TDTMatrix;
+class operator TDTMatrix.Divide(x: double; A: TDTMatrix): TDTMatrix;
 begin
-  Result := DTCore.Divide(A, B);
+  Result := DTCore.Divide(x, A);
 end;
+
+
 
 function TDTMatrix.T: TDTMatrix;
 var
@@ -602,6 +611,17 @@ function Divide(A: TDTMatrix; x: double): TDTMatrix;
 begin
   Result := DTCore.CopyMatrix(A);
   blas_dscal(A.Height * A.Width, 1 / x, Result.val, 1);
+end;
+
+function Divide(x: double; A: TDTMatrix): TDTMatrix;
+var
+  i: integer;
+begin
+  SetLength(Result.val, Length(A.val));
+  for i := 0 to High(A.val) do
+    Result.val[i] := x / A.val[i];
+  Result.Width := A.Height;
+  Result.Height := A.Height;
 end;
 
 function Divide(A, B: TDTMatrix): TDTMatrix;
