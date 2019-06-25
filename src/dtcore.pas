@@ -6,7 +6,7 @@ unit DTCore;
 interface
 
 uses
-  Classes, SysUtils, dynlibs, LazLogger;
+  Classes, SysUtils, dynlibs;
 
 const
   {$IFDEF MSWINDOWS}
@@ -36,9 +36,12 @@ type
     Height: longint;
     class operator Implicit(A: TFloatVector): TDTMatrix;
     class operator Explicit(A: TFloatVector): TDTMatrix;
-    class operator Add(A, B: TDTMatrix): TDTMatrix;
+    class operator Add(A, B: TDTMatrix): TDTMatrix; overload;
+    class operator Add(A: TDTMatrix; x: integer): TDTMatrix; overload;
+    class operator Add(x: integer; A: TDTMatrix): TDTMatrix; overload;
     class operator Subtract(A, B: TDTMatrix): TDTMatrix; overload;
     class operator Subtract(A: TDTMatrix; x: double): TDTMatrix; overload;
+    class operator Subtract(x: double; A: TDTMatrix): TDTMatrix; overload;
     class operator Multiply(A: TDTMatrix; x: double): TDTMatrix; overload;
     class operator Multiply(x: double; A: TDTMatrix): TDTMatrix; overload;
     class operator Multiply(A, B: TDTMatrix): TDTMatrix; overload;
@@ -51,6 +54,7 @@ type
     function Dot(A: TDTMatrix): TDTMatrix;
     function Apply(func: TCallbackDouble): TDTMatrix;
     function Sum(axis: integer = -1): TDTMatrix;
+    function ToStringTable: string;
   end;
 
 
@@ -151,7 +155,9 @@ function Dot(A, B: TDTMatrix): TDTMatrix;
 
 function Abs(x: double): double; overload;
 function Abs(A: TDTMatrix): TDTMatrix; overload;
-function Add(A, B: TDTMatrix): TDTMatrix;
+function Add(A: TDTMatrix; x: integer): TDTMatrix; overload;
+function Add(x: integer; A: TDTMatrix): TDTMatrix; overload;
+function Add(A, B: TDTMatrix): TDTMatrix; overload;
 
 { Append B (column vectors) after last column of A.
   A and B must have the same height. }
@@ -171,6 +177,7 @@ function InsertColumnsAt(A, B: TDTMatrix; pos: integer): TDTMatrix;
 
 function Subtract(A, B: TDTMatrix): TDTMatrix; overload;
 function Subtract(A: TDTMatrix; x: double): TDTMatrix; overload;
+function Subtract(x: double; A: TDTMatrix): TDTMatrix; overload;
 function Multiply(A: TDTMatrix; x: double): TDTMatrix; overload;
 function Multiply(A, B: TDTMatrix): TDTMatrix; overload;
 function Diag(A: TDTMatrix): TDTMatrix; overload;
@@ -288,7 +295,7 @@ begin
     Pointer(@LAPACKE_dgeev) := GetProcedureAddress(libHandle, 'LAPACKE_dgeev');
   end
   else
-    DebugLn('The required ' + BLAS_FILENAME + 'is not found.');
+    WriteLn('The required ' + BLAS_FILENAME + 'is not found.');
 end;
 
 procedure DarkTealRelease;
@@ -319,6 +326,16 @@ begin
   Result := DTCore.Add(A, B);
 end;
 
+class operator TDTMatrix.Add(A: TDTMatrix; x: integer): TDTMatrix;
+begin
+  Result := Add(A, x);
+end;
+
+class operator TDTMatrix.Add(x: integer; A: TDTMatrix): TDTMatrix;
+begin
+  Result := Add(A, x);
+end;
+
 class operator TDTMatrix.Subtract(A, B: TDTMatrix): TDTMatrix;
 begin
   Result := DTCore.Subtract(A, B);
@@ -327,6 +344,11 @@ end;
 class operator TDTMatrix.Subtract(A: TDTMatrix; x: double): TDTMatrix;
 begin
   Result := DTCore.Subtract(A, x);
+end;
+
+class operator TDTMatrix.Subtract(x: double; A: TDTMatrix): TDTMatrix;
+begin
+  Result := DTCore.Subtract(x, A);
 end;
 
 class operator TDTMatrix.Multiply(A: TDTMatrix; x: double): TDTMatrix;
@@ -416,6 +438,24 @@ end;
 function TDTMatrix.Sum(axis: integer = -1): TDTMatrix;
 begin
   Result := DTCore.Sum(self, axis);
+end;
+
+function TDTMatrix.ToStringTable: string;
+var
+  i, j: integer;
+begin
+  Result := '';
+  for i := 0 to self.Height - 1 do
+  begin
+    for j := 0 to self.Width - 1 do
+    begin
+      Result := Result + FloatToStr(self.val[i * self.Width + j]);
+      if j < self.Width - 1 then
+        Result := Result + ' ';
+    end;
+    if i < self.Height - 1 then
+      Result := Result + LineEnding;
+  end;
 end;
 
 procedure PrintMatrix(M: TDTMatrix);
@@ -894,6 +934,16 @@ begin
   Result := Apply(@Abs, A);
 end;
 
+function Add(A: TDTMatrix; x: integer): TDTMatrix;
+begin
+  Result := Add(A, CreateMatrix(A.Height, A.Width, x));
+end;
+
+function Add(x: integer; A: TDTMatrix): TDTMatrix;
+begin
+  Result := Add(A, x);
+end;
+
 function Add(A, B: TDTMatrix): TDTMatrix;
 begin
   Result := CopyMatrix(B);
@@ -964,6 +1014,11 @@ end;
 function Subtract(A: TDTMatrix; x: double): TDTMatrix;
 begin
   Result := Subtract(A, CreateMatrix(A.Height, A.Width, x));
+end;
+
+function Subtract(x: double; A: TDTMatrix): TDTMatrix;
+begin
+  Result := Subtract(CreateMatrix(A.Height, A.Width, x), A);
 end;
 
 function TDTMatrixFromCSV(f: string): TDTMatrix;
