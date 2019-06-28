@@ -59,13 +59,25 @@ Darkteal matrix representation</p>
 <td class="itemcode"><code>function <b><a  href="DTCore.TDTMatrix.html#T">T</a></b>: <a  href="DTCore.TDTMatrix.html">TDTMatrix</a>;</code></td>
 </tr>
 <tr class="list2">
-<td class="itemcode"><code>class operator <b><a  href="DTCore.TDTMatrix.html#Add">Add</a></b>(A, B: <a  href="DTCore.TDTMatrix.html">TDTMatrix</a>): <a  href="DTCore.TDTMatrix.html">TDTMatrix</a>;</code></td>
+<td class="itemcode"><code>function <b><a  href="DTCore.TDTMatrix.html#ToStringTable">ToStringTable</a></b>: string;</code></td>
 </tr>
 <tr class="list">
-<td class="itemcode"><code>class operator <b><a  href="DTCore.TDTMatrix.html#Divide">Divide</a></b>(A, B: <a  href="DTCore.TDTMatrix.html">TDTMatrix</a>): <a  href="DTCore.TDTMatrix.html">TDTMatrix</a>; overload;</code></td>
+<td class="itemcode"><code>class operator <b><a  href="DTCore.TDTMatrix.html#Add">Add</a></b>(A, B: <a  href="DTCore.TDTMatrix.html">TDTMatrix</a>): <a  href="DTCore.TDTMatrix.html">TDTMatrix</a>; overload;</code></td>
 </tr>
 <tr class="list2">
+<td class="itemcode"><code>class operator <b><a  href="DTCore.TDTMatrix.html#Add">Add</a></b>(A: <a  href="DTCore.TDTMatrix.html">TDTMatrix</a>; x: integer): <a  href="DTCore.TDTMatrix.html">TDTMatrix</a>; overload;</code></td>
+</tr>
+<tr class="list">
+<td class="itemcode"><code>class operator <b><a  href="DTCore.TDTMatrix.html#Add">Add</a></b>(x: integer; A: <a  href="DTCore.TDTMatrix.html">TDTMatrix</a>): <a  href="DTCore.TDTMatrix.html">TDTMatrix</a>; overload;</code></td>
+</tr>
+<tr class="list2">
+<td class="itemcode"><code>class operator <b><a  href="DTCore.TDTMatrix.html#Divide">Divide</a></b>(x: double; A: <a  href="DTCore.TDTMatrix.html">TDTMatrix</a>): <a  href="DTCore.TDTMatrix.html">TDTMatrix</a>; overload;</code></td>
+</tr>
+<tr class="list">
 <td class="itemcode"><code>class operator <b><a  href="DTCore.TDTMatrix.html#Divide">Divide</a></b>(A: <a  href="DTCore.TDTMatrix.html">TDTMatrix</a>; x: double): <a  href="DTCore.TDTMatrix.html">TDTMatrix</a>; overload;</code></td>
+</tr>
+<tr class="list2">
+<td class="itemcode"><code>class operator <b><a  href="DTCore.TDTMatrix.html#Divide">Divide</a></b>(A, B: <a  href="DTCore.TDTMatrix.html">TDTMatrix</a>): <a  href="DTCore.TDTMatrix.html">TDTMatrix</a>; overload;</code></td>
 </tr>
 <tr class="list">
 <td class="itemcode"><code>class operator <b><a  href="DTCore.TDTMatrix.html#Explicit">Explicit</a></b>(A: <a  href="DTCore.html#TFloatVector">TFloatVector</a>): <a  href="DTCore.TDTMatrix.html">TDTMatrix</a>;</code></td>
@@ -83,10 +95,13 @@ Darkteal matrix representation</p>
 <td class="itemcode"><code>class operator <b><a  href="DTCore.TDTMatrix.html#Multiply">Multiply</a></b>(A, B: <a  href="DTCore.TDTMatrix.html">TDTMatrix</a>): <a  href="DTCore.TDTMatrix.html">TDTMatrix</a>; overload;</code></td>
 </tr>
 <tr class="list2">
-<td class="itemcode"><code>class operator <b><a  href="DTCore.TDTMatrix.html#Subtract">Subtract</a></b>(A: <a  href="DTCore.TDTMatrix.html">TDTMatrix</a>; x: double): <a  href="DTCore.TDTMatrix.html">TDTMatrix</a>; overload;</code></td>
+<td class="itemcode"><code>class operator <b><a  href="DTCore.TDTMatrix.html#Subtract">Subtract</a></b>(A, B: <a  href="DTCore.TDTMatrix.html">TDTMatrix</a>): <a  href="DTCore.TDTMatrix.html">TDTMatrix</a>; overload;</code></td>
 </tr>
 <tr class="list">
-<td class="itemcode"><code>class operator <b><a  href="DTCore.TDTMatrix.html#Subtract">Subtract</a></b>(A, B: <a  href="DTCore.TDTMatrix.html">TDTMatrix</a>): <a  href="DTCore.TDTMatrix.html">TDTMatrix</a>; overload;</code></td>
+<td class="itemcode"><code>class operator <b><a  href="DTCore.TDTMatrix.html#Subtract">Subtract</a></b>(A: <a  href="DTCore.TDTMatrix.html">TDTMatrix</a>; x: double): <a  href="DTCore.TDTMatrix.html">TDTMatrix</a>; overload;</code></td>
+</tr>
+<tr class="list2">
+<td class="itemcode"><code>class operator <b><a  href="DTCore.TDTMatrix.html#Subtract">Subtract</a></b>(x: double; A: <a  href="DTCore.TDTMatrix.html">TDTMatrix</a>): <a  href="DTCore.TDTMatrix.html">TDTMatrix</a>; overload;</code></td>
 </tr>
 </table>
 <h2 class="description">Description</h2>
@@ -164,14 +179,35 @@ Darkteal matrix representation</p>
 </table>
 <table class="detail wide_list">
 <tr class="list">
-<td class="itemcode"><span id="Add"></span><code>class operator <b>Add</b>(A, B: <a  href="DTCore.TDTMatrix.html">TDTMatrix</a>): <a  href="DTCore.TDTMatrix.html">TDTMatrix</a>;</code></td>
+<td class="itemcode"><span id="ToStringTable"></span><code>function <b>ToStringTable</b>: string;</code></td>
 </tr>
 <tr><td colspan="1">
 &nbsp;</td></tr>
 </table>
 <table class="detail wide_list">
 <tr class="list">
-<td class="itemcode"><span id="Divide"></span><code>class operator <b>Divide</b>(A, B: <a  href="DTCore.TDTMatrix.html">TDTMatrix</a>): <a  href="DTCore.TDTMatrix.html">TDTMatrix</a>; overload;</code></td>
+<td class="itemcode"><span id="Add"></span><code>class operator <b>Add</b>(A, B: <a  href="DTCore.TDTMatrix.html">TDTMatrix</a>): <a  href="DTCore.TDTMatrix.html">TDTMatrix</a>; overload;</code></td>
+</tr>
+<tr><td colspan="1">
+&nbsp;</td></tr>
+</table>
+<table class="detail wide_list">
+<tr class="list">
+<td class="itemcode"><span id="Add"></span><code>class operator <b>Add</b>(A: <a  href="DTCore.TDTMatrix.html">TDTMatrix</a>; x: integer): <a  href="DTCore.TDTMatrix.html">TDTMatrix</a>; overload;</code></td>
+</tr>
+<tr><td colspan="1">
+&nbsp;</td></tr>
+</table>
+<table class="detail wide_list">
+<tr class="list">
+<td class="itemcode"><span id="Add"></span><code>class operator <b>Add</b>(x: integer; A: <a  href="DTCore.TDTMatrix.html">TDTMatrix</a>): <a  href="DTCore.TDTMatrix.html">TDTMatrix</a>; overload;</code></td>
+</tr>
+<tr><td colspan="1">
+&nbsp;</td></tr>
+</table>
+<table class="detail wide_list">
+<tr class="list">
+<td class="itemcode"><span id="Divide"></span><code>class operator <b>Divide</b>(x: double; A: <a  href="DTCore.TDTMatrix.html">TDTMatrix</a>): <a  href="DTCore.TDTMatrix.html">TDTMatrix</a>; overload;</code></td>
 </tr>
 <tr><td colspan="1">
 &nbsp;</td></tr>
@@ -179,6 +215,13 @@ Darkteal matrix representation</p>
 <table class="detail wide_list">
 <tr class="list">
 <td class="itemcode"><span id="Divide"></span><code>class operator <b>Divide</b>(A: <a  href="DTCore.TDTMatrix.html">TDTMatrix</a>; x: double): <a  href="DTCore.TDTMatrix.html">TDTMatrix</a>; overload;</code></td>
+</tr>
+<tr><td colspan="1">
+&nbsp;</td></tr>
+</table>
+<table class="detail wide_list">
+<tr class="list">
+<td class="itemcode"><span id="Divide"></span><code>class operator <b>Divide</b>(A, B: <a  href="DTCore.TDTMatrix.html">TDTMatrix</a>): <a  href="DTCore.TDTMatrix.html">TDTMatrix</a>; overload;</code></td>
 </tr>
 <tr><td colspan="1">
 &nbsp;</td></tr>
@@ -220,6 +263,13 @@ Darkteal matrix representation</p>
 </table>
 <table class="detail wide_list">
 <tr class="list">
+<td class="itemcode"><span id="Subtract"></span><code>class operator <b>Subtract</b>(A, B: <a  href="DTCore.TDTMatrix.html">TDTMatrix</a>): <a  href="DTCore.TDTMatrix.html">TDTMatrix</a>; overload;</code></td>
+</tr>
+<tr><td colspan="1">
+&nbsp;</td></tr>
+</table>
+<table class="detail wide_list">
+<tr class="list">
 <td class="itemcode"><span id="Subtract"></span><code>class operator <b>Subtract</b>(A: <a  href="DTCore.TDTMatrix.html">TDTMatrix</a>; x: double): <a  href="DTCore.TDTMatrix.html">TDTMatrix</a>; overload;</code></td>
 </tr>
 <tr><td colspan="1">
@@ -227,7 +277,7 @@ Darkteal matrix representation</p>
 </table>
 <table class="detail wide_list">
 <tr class="list">
-<td class="itemcode"><span id="Subtract"></span><code>class operator <b>Subtract</b>(A, B: <a  href="DTCore.TDTMatrix.html">TDTMatrix</a>): <a  href="DTCore.TDTMatrix.html">TDTMatrix</a>; overload;</code></td>
+<td class="itemcode"><span id="Subtract"></span><code>class operator <b>Subtract</b>(x: double; A: <a  href="DTCore.TDTMatrix.html">TDTMatrix</a>): <a  href="DTCore.TDTMatrix.html">TDTMatrix</a>; overload;</code></td>
 </tr>
 <tr><td colspan="1">
 &nbsp;</td></tr>

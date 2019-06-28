@@ -73,7 +73,13 @@ The mandatory include unit for darkteal</p>
 <td class="itemcode"><code>function <b><a  href="DTCore.html#Abs">Abs</a></b>(A: <a  href="DTCore.TDTMatrix.html">TDTMatrix</a>): <a  href="DTCore.TDTMatrix.html">TDTMatrix</a>; overload;</code></td>
 </tr>
 <tr class="list">
-<td class="itemcode"><code>function <b><a  href="DTCore.html#Add">Add</a></b>(A, B: <a  href="DTCore.TDTMatrix.html">TDTMatrix</a>): <a  href="DTCore.TDTMatrix.html">TDTMatrix</a>;</code></td>
+<td class="itemcode"><code>function <b><a  href="DTCore.html#Add">Add</a></b>(A: <a  href="DTCore.TDTMatrix.html">TDTMatrix</a>; x: integer): <a  href="DTCore.TDTMatrix.html">TDTMatrix</a>; overload;</code></td>
+</tr>
+<tr class="list2">
+<td class="itemcode"><code>function <b><a  href="DTCore.html#Add">Add</a></b>(x: integer; A: <a  href="DTCore.TDTMatrix.html">TDTMatrix</a>): <a  href="DTCore.TDTMatrix.html">TDTMatrix</a>; overload;</code></td>
+</tr>
+<tr class="list">
+<td class="itemcode"><code>function <b><a  href="DTCore.html#Add">Add</a></b>(A, B: <a  href="DTCore.TDTMatrix.html">TDTMatrix</a>): <a  href="DTCore.TDTMatrix.html">TDTMatrix</a>; overload;</code></td>
 </tr>
 <tr class="list2">
 <td class="itemcode"><code>function <b><a  href="DTCore.html#AppendColumns">AppendColumns</a></b>(A, B: <a  href="DTCore.TDTMatrix.html">TDTMatrix</a>): <a  href="DTCore.TDTMatrix.html">TDTMatrix</a>;</code></td>
@@ -94,19 +100,25 @@ The mandatory include unit for darkteal</p>
 <td class="itemcode"><code>function <b><a  href="DTCore.html#Subtract">Subtract</a></b>(A: <a  href="DTCore.TDTMatrix.html">TDTMatrix</a>; x: double): <a  href="DTCore.TDTMatrix.html">TDTMatrix</a>; overload;</code></td>
 </tr>
 <tr class="list2">
-<td class="itemcode"><code>function <b><a  href="DTCore.html#Multiply">Multiply</a></b>(A: <a  href="DTCore.TDTMatrix.html">TDTMatrix</a>; x: double): <a  href="DTCore.TDTMatrix.html">TDTMatrix</a>; overload;</code></td>
+<td class="itemcode"><code>function <b><a  href="DTCore.html#Subtract">Subtract</a></b>(x: double; A: <a  href="DTCore.TDTMatrix.html">TDTMatrix</a>): <a  href="DTCore.TDTMatrix.html">TDTMatrix</a>; overload;</code></td>
 </tr>
 <tr class="list">
-<td class="itemcode"><code>function <b><a  href="DTCore.html#Multiply">Multiply</a></b>(A, B: <a  href="DTCore.TDTMatrix.html">TDTMatrix</a>): <a  href="DTCore.TDTMatrix.html">TDTMatrix</a>; overload;</code></td>
+<td class="itemcode"><code>function <b><a  href="DTCore.html#Multiply">Multiply</a></b>(A: <a  href="DTCore.TDTMatrix.html">TDTMatrix</a>; x: double): <a  href="DTCore.TDTMatrix.html">TDTMatrix</a>; overload;</code></td>
 </tr>
 <tr class="list2">
+<td class="itemcode"><code>function <b><a  href="DTCore.html#Multiply">Multiply</a></b>(A, B: <a  href="DTCore.TDTMatrix.html">TDTMatrix</a>): <a  href="DTCore.TDTMatrix.html">TDTMatrix</a>; overload;</code></td>
+</tr>
+<tr class="list">
 <td class="itemcode"><code>function <b><a  href="DTCore.html#Diag">Diag</a></b>(A: <a  href="DTCore.TDTMatrix.html">TDTMatrix</a>): <a  href="DTCore.TDTMatrix.html">TDTMatrix</a>; overload;</code></td>
+</tr>
+<tr class="list2">
+<td class="itemcode"><code>function <b><a  href="DTCore.html#Divide">Divide</a></b>(A, B: <a  href="DTCore.TDTMatrix.html">TDTMatrix</a>): <a  href="DTCore.TDTMatrix.html">TDTMatrix</a>; overload;</code></td>
 </tr>
 <tr class="list">
 <td class="itemcode"><code>function <b><a  href="DTCore.html#Divide">Divide</a></b>(A: <a  href="DTCore.TDTMatrix.html">TDTMatrix</a>; x: double): <a  href="DTCore.TDTMatrix.html">TDTMatrix</a>; overload;</code></td>
 </tr>
 <tr class="list2">
-<td class="itemcode"><code>function <b><a  href="DTCore.html#Divide">Divide</a></b>(A, B: <a  href="DTCore.TDTMatrix.html">TDTMatrix</a>): <a  href="DTCore.TDTMatrix.html">TDTMatrix</a>; overload;</code></td>
+<td class="itemcode"><code>function <b><a  href="DTCore.html#Divide">Divide</a></b>(x: double; A: <a  href="DTCore.TDTMatrix.html">TDTMatrix</a>): <a  href="DTCore.TDTMatrix.html">TDTMatrix</a>; overload;</code></td>
 </tr>
 <tr class="list">
 <td class="itemcode"><code>function <b><a  href="DTCore.html#Sum">Sum</a></b>(A: <a  href="DTCore.TDTMatrix.html">TDTMatrix</a>): double; overload;</code></td>
@@ -343,7 +355,21 @@ Dot product between two matrices. It implements BLAS _dgemm.</p>
 </table>
 <table class="detail wide_list">
 <tr class="list">
-<td class="itemcode"><span id="Add"></span><code>function <b>Add</b>(A, B: <a  href="DTCore.TDTMatrix.html">TDTMatrix</a>): <a  href="DTCore.TDTMatrix.html">TDTMatrix</a>;</code></td>
+<td class="itemcode"><span id="Add"></span><code>function <b>Add</b>(A: <a  href="DTCore.TDTMatrix.html">TDTMatrix</a>; x: integer): <a  href="DTCore.TDTMatrix.html">TDTMatrix</a>; overload;</code></td>
+</tr>
+<tr><td colspan="1">
+&nbsp;</td></tr>
+</table>
+<table class="detail wide_list">
+<tr class="list">
+<td class="itemcode"><span id="Add"></span><code>function <b>Add</b>(x: integer; A: <a  href="DTCore.TDTMatrix.html">TDTMatrix</a>): <a  href="DTCore.TDTMatrix.html">TDTMatrix</a>; overload;</code></td>
+</tr>
+<tr><td colspan="1">
+&nbsp;</td></tr>
+</table>
+<table class="detail wide_list">
+<tr class="list">
+<td class="itemcode"><span id="Add"></span><code>function <b>Add</b>(A, B: <a  href="DTCore.TDTMatrix.html">TDTMatrix</a>): <a  href="DTCore.TDTMatrix.html">TDTMatrix</a>; overload;</code></td>
 </tr>
 <tr><td colspan="1">
 &nbsp;</td></tr>
@@ -400,6 +426,13 @@ Insert B into A at column index pos. A and B must have the same height.</p>
 </table>
 <table class="detail wide_list">
 <tr class="list">
+<td class="itemcode"><span id="Subtract"></span><code>function <b>Subtract</b>(x: double; A: <a  href="DTCore.TDTMatrix.html">TDTMatrix</a>): <a  href="DTCore.TDTMatrix.html">TDTMatrix</a>; overload;</code></td>
+</tr>
+<tr><td colspan="1">
+&nbsp;</td></tr>
+</table>
+<table class="detail wide_list">
+<tr class="list">
 <td class="itemcode"><span id="Multiply"></span><code>function <b>Multiply</b>(A: <a  href="DTCore.TDTMatrix.html">TDTMatrix</a>; x: double): <a  href="DTCore.TDTMatrix.html">TDTMatrix</a>; overload;</code></td>
 </tr>
 <tr><td colspan="1">
@@ -421,6 +454,13 @@ Insert B into A at column index pos. A and B must have the same height.</p>
 </table>
 <table class="detail wide_list">
 <tr class="list">
+<td class="itemcode"><span id="Divide"></span><code>function <b>Divide</b>(A, B: <a  href="DTCore.TDTMatrix.html">TDTMatrix</a>): <a  href="DTCore.TDTMatrix.html">TDTMatrix</a>; overload;</code></td>
+</tr>
+<tr><td colspan="1">
+&nbsp;</td></tr>
+</table>
+<table class="detail wide_list">
+<tr class="list">
 <td class="itemcode"><span id="Divide"></span><code>function <b>Divide</b>(A: <a  href="DTCore.TDTMatrix.html">TDTMatrix</a>; x: double): <a  href="DTCore.TDTMatrix.html">TDTMatrix</a>; overload;</code></td>
 </tr>
 <tr><td colspan="1">
@@ -428,7 +468,7 @@ Insert B into A at column index pos. A and B must have the same height.</p>
 </table>
 <table class="detail wide_list">
 <tr class="list">
-<td class="itemcode"><span id="Divide"></span><code>function <b>Divide</b>(A, B: <a  href="DTCore.TDTMatrix.html">TDTMatrix</a>): <a  href="DTCore.TDTMatrix.html">TDTMatrix</a>; overload;</code></td>
+<td class="itemcode"><span id="Divide"></span><code>function <b>Divide</b>(x: double; A: <a  href="DTCore.TDTMatrix.html">TDTMatrix</a>): <a  href="DTCore.TDTMatrix.html">TDTMatrix</a>; overload;</code></td>
 </tr>
 <tr><td colspan="1">
 &nbsp;</td></tr>
