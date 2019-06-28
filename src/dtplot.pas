@@ -167,9 +167,6 @@ begin
 
   end;
 
-  writeln(Utf8ToAnsi(Format('"%s" --persist -e "%s" ',
-    [_GNUPlotPath, self.GenerateScript])));
-
   { do cleanup (temp files removal) }
   for i := 0 to PlotList.Count - 1 do
     TPlot(PlotList.Items[i]).RemoveDataStringTableFile;
