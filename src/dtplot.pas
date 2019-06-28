@@ -1,4 +1,5 @@
-{ This unit facilitates the bridging between darkteal and Gnuplot }
+{ This unit facilitates the plotting functionality for darkteal.
+  Gnuplot is used as the backend. }
 
 unit DTPlot;
 
@@ -16,7 +17,7 @@ var
 
 type
 
-  TPlotType = (ptLines, ptPoints, ptHistogram);
+  TPlotType = (ptBoxes, ptLines, ptPoints, ptHistogram);
 
   { @abstract(A record containing plot style) }
   TPlotStyle = record
@@ -211,6 +212,7 @@ begin
     ptLines: PlotTypeStr := 'lines';
     ptPoints: PlotTypeStr := 'points';
     ptHistogram: PlotTypeStr := 'histogram';
+    ptBoxes: PlotTypeStr := 'boxes';
   end;
 
   if not OverrideDefaultStyle then
