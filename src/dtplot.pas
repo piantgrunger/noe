@@ -67,7 +67,7 @@ type
 
 
 { Initialize plotting functionality by passing gnuplot executable path }
-procedure DTGNUPlotInit(GNUplotPath: string);
+procedure DTPlotInit(GNUplotPath: string);
 
 implementation
 
@@ -86,7 +86,7 @@ begin
   sl.SaveToFile(fn);
 end;
 
-function IsDTGNUPlotReady: boolean;
+function IsDTPlotReady: boolean;
 begin
   Result := True;
   if not _GNUPlotInitialized then
@@ -96,7 +96,7 @@ begin
   end;
 end;
 
-procedure DTGNUPlotInit(GNUplotPath: string);
+procedure DTPlotInit(GNUplotPath: string);
 begin
   _GNUPlotPath := GNUplotPath;
   _GNUPlotTerminal := 'qt';
@@ -159,7 +159,7 @@ begin
   for i := 0 to PlotList.Count - 1 do
     TPlot(PlotList.Items[i]).WriteDataStringTableToFile;
 
-  if IsDTGNUPlotReady then
+  if IsDTPlotReady then
   begin
     ExecuteProcess(Utf8ToAnsi(Format('%s --persist -e "%s" ',
       [_GNUPlotPath, self.GenerateScript])),
